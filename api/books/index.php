@@ -16,14 +16,14 @@ switch ($method) {
         $sql = "SELECT * FROM books";
         $path = explode('/', $_SERVER['REQUEST_URI']);
         
-        // ตรวจสอบว่ามีพารามิเตอร์ genre หรือไม่
+       
         $genre = isset($_GET['genre']) ? $_GET['genre'] : null;
         
         if (isset($path[4]) && is_numeric($path[4])) {
             // ถ้ามีการระบุ ID
             $sql .= " WHERE id = :id";
             if ($genre) {
-                $sql .= " AND genre = :genre"; // กรองตามประเภทถ้ามี
+                $sql .= " AND genre = :genre"; 
             }
 
             $stmt = $conn->prepare($sql);
@@ -41,9 +41,9 @@ switch ($method) {
                 echo json_encode(["message" => "Book not found"]);
             }
         } else {
-            // ถ้าไม่มีการระบุ ID
+            
             if ($genre) {
-                $sql .= " WHERE genre = :genre"; // กรองตามประเภทถ้ามี
+                $sql .= " WHERE genre = :genre"; 
             }
             $stmt = $conn->prepare($sql);
             if ($genre) {
